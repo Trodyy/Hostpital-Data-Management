@@ -29,6 +29,10 @@ Clone the repo.
 ```
 git clone git@github.com:Trodyy/Hostpital-Data-Management.git
 ```
+Run the following command.
+```
+pip freeze > requirements.txt
+```
 Build up the project by make command.
 ```
 make up

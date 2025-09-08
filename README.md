@@ -22,7 +22,7 @@ This project aims to develop a robust data management and analytics pipeline for
 
 ✅ Dcoker
 
-
+✅ Unit Testing(pytest)
 ## Installation
 
 Clone the repo.

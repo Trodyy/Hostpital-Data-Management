@@ -2,6 +2,27 @@
 
 This project aims to develop a robust data management and analytics pipeline for hospital data, leveraging modern data engineering techniques to enhance data quality, derive actionable insights, and support historical tracking. The focus is on processing hospital-related tabular data to ensure its usability for operational and analytical purposes.We use these datasets : [Hospital Management](https://www.kaggle.com/datasets/kanakbaghel/hospital-management-dataset)
 
+
+
+## Tools
+
+✅ Postgresql
+
+✅ Data Modelling
+
+✅ SCD Tables
+
+✅ Apache Spark(PySpark)
+
+✅ Apache Iceberg
+
+✅ MinIO
+
+✅ Tableau
+
+✅ Dcoker
+
+
 ## Installation
 
 Clone the repo.
@@ -12,10 +33,10 @@ Build up the project by make command.
 ```
 make up
 ```
-If you didn't install make run following commands.
+If you didn't install make run following commands(Linux/Ubuntu).
 ```
 sudo apt update
-sudo apt-get install make
+sudo apt install make
 ```
 You can also use docker-compose directly.
 ```

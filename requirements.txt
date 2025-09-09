@@ -1,5 +1,1 @@
-pyspark
 minio
-pyiceberg
-pytest
-psycopg2-binary

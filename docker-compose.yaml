@@ -34,6 +34,4 @@ services:
       - minio
     volumes:
       - ./code:/app
-
     working_dir: /app
-    command: ["python3" , "main.py"]

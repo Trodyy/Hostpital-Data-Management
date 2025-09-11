@@ -35,4 +35,5 @@ services:
     volumes:
       - ./code:/app
     working_dir: /app
-    command:  tail -f /dev/null
+    command: /bin/sh -c "python3 main.py && tail -f /dev/null"
+

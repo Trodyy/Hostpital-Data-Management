@@ -38,4 +38,16 @@ services:
     command: /bin/sh -c "python download-data.py && tail -f /dev/null"
 
 
-
+  jupyter/pyspark :configs:
+    iamge : jupyter/pyspark-notebook:latest
+    container_name: pysaprk-notebook
+    ports:
+      - "8884:8888"
+      - "4048:4040"
+    depends_on:
+      - minio
+      - python-minio
+    volumes:
+      - /spark_data:/data
+    environment:
+      JUPYTER_TOKEN=admin

@@ -47,6 +47,7 @@ services:
       - minio
       - python-client
     volumes:
+      - ./csv_datas:/data
       - ./spark_data:/data
     environment:
       JUPYTER_TOKEN: admin

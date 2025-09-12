@@ -47,8 +47,9 @@ services:
       - minio
       - python-client
     volumes:
-      - ./csv_datas:/data
-      - ./spark_data:/data
+      - ./csv_datas:/home/jovyan/csv_datas
+      - ./spark_data:/home/jovyan/spark_data
+
     environment:
       JUPYTER_TOKEN: admin
 

@@ -33,6 +33,12 @@ Run the following command.
 ```
 pip freeze > requirements.txt
 ```
+Create notebooks directory.
+```
+mkdir -p notebooks
+sudo chown -R 1000:100 notebooks
+```
+
 Build up the project by make command.
 ```
 make build

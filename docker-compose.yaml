@@ -48,7 +48,7 @@ services:
       - python-client
     volumes:
       - ./csv_datas:/home/jovyan/csv_datas
-      - ./spark_data:/home/jovyan/spark_data
+      - ./notebooks:/home/jovyan/work
 
     environment:
       JUPYTER_TOKEN: admin

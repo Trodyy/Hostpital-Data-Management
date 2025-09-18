@@ -51,7 +51,7 @@ services:
       - ./notebooks:/home/jovyan/work
 
     environment:
-      JUPYTER_TOKEN: admin
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
   
 
 

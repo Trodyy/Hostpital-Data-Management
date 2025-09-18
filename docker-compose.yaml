@@ -68,7 +68,9 @@ services:
     ports:
       - ${POSTGRES_PORT}:5432
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data  
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./csv_datas/:/csv_datas
+      - ./init-scripts:/docker-entrypoint-initdb.d 
 
   pgadmin:
     image: dpage/pgadmin4

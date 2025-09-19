@@ -55,7 +55,11 @@ docker compose build -d
 docker compose up -d
 ```
 
+to add initiallly data
+```
+docker exec -i postgres-db bash -c "psql -U postgres -d postgres" < init.sql
 
+```
 ## Usage
 
 ```python

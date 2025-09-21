@@ -33,4 +33,4 @@ SELECT
 	COALESCE(t.appointment_date , y.cur_date + INTERVAL '1 day') AS cur_date
 FROM today t
 FULL OUTER JOIN yesterday y
-ON t.appointment_date = y.cur_date
+ON t.patient_id = y.patient_id

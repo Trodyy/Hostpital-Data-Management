@@ -1,41 +1,36 @@
-WITH gen_dates AS (
-	SELECT *
-	FROM generate_series(
-	    '2023-01-01'::date,
-	    '2023-12-30'::date,
-	    '1 day'::interval
-		)
-) ,
-	yesterday AS (
+-- CREATE TABLE patient_analyze (
+-- 	patient_id TEXT ,
+-- 	reason_for_visit TEXT ,
+-- 	date_visit_list DATE[] ,
+-- 	cur_date DATE ,
+-- 	PRIMARY KEY (patient_id , reason_for_visit , cur_date)
+-- )
+
+
+WITH yesterday AS (
 		SELECT
 			*
 		FROM patient_analyze
-		--WHERE appointment_date = DATE('2022-12-31')
+		--WHERE cur_date = DATE('2022-12-31 ')
+		WHERE cur_date = DATE('2023-01-01 ')
 ) ,
 	today AS (
 		SELECT *
-		FROM gen_dates
-		--WHERE generate_series = DATE('2023-01-01')
+		FROM appointments
+		WHERE appointment_date = DATE('2023-01-02')
 )
 
 
-
-SELECT 
-	COALESCE(y.patient_id , 'unknown') AS patient_id ,
-	COALESCE(y.status , 'unknown') AS status ,
-	COALESCE(y.appointment_date , DATE('0001-01-01')) AS appointment_date ,
-	
+INSERT INTO patient_analyze
+SELECT
+	COALESCE(t.patient_id , y.patient_id) AS patient_id ,
+	COALESCE(t.reason_for_visit , y.reason_for_visit) AS reason_for_visit ,
+	COALESCE(y.date_visit_list , ARRAY[]::DATE[]) ||
+		CASE WHEN t.patient_id IS NOT NULL
+		 THEN ARRAY[t.appointment_date]::DATE[]
+		 ELSE ARRAY[]::DATE[]
+		 END AS date_visit_list ,
+	COALESCE(t.appointment_date , y.cur_date + INTERVAL '1 day') AS cur_date
 FROM today t
-INNER JOIN yesterday y
-ON t.generate_series = y.appointment_date
---WHERE patient_id IS NULL
-
-
-
-
-
-
-
-
-
-
+FULL OUTER JOIN yesterday y
+ON t.appointment_date = y.cur_date

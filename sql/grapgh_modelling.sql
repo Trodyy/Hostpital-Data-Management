@@ -28,7 +28,7 @@ CREATE TABLE edges (
 );
 
 
-INSERT INTO vertices
+--INSERT INTO vertices
 SELECT
     patient_id AS identifier,
     'patient'::VERTEX_TYPE AS type,
@@ -44,7 +44,7 @@ SELECT
 FROM patients p;
 
 
-INSERT INTO vertices
+--INSERT INTO vertices
 SELECT
 	doctor_id AS identifier ,
 	'doctor'::vertex_type AS type ,
@@ -71,7 +71,7 @@ WITH aggregated AS (
 	GROUP BY 1 , 2
 )
 
-INSERT INTO edges
+--INSERT INTO edges
 SELECT
 	patient_id AS subject_identifier ,
 	'patient'::vertex_type AS subject_type ,
@@ -83,3 +83,27 @@ SELECT
 		'number_of_visit' , subject_visit
 	) AS properties
 FROM aggregated
+
+
+
+
+
+
+
+
+
+
+
+--An Super Analyze
+SELECT 
+	v.identifier,
+	e.object_identifier ,
+	v.properties->>'name' AS patient_name ,
+	v.properties->>'total_cost' AS total_cost ,
+	e.properties->>'total_cost' AS total_cost_for_doctor
+FROM vertices v
+JOIN edges e
+ON v.identifier = e.subject_identifier
+AND v.type = e.subject_type
+WHERE e.object_type = 'doctor'
+ORDER BY v.identifier

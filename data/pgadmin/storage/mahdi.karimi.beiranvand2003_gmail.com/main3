@@ -1,0 +1,105 @@
+-- CREATE TYPE vertex_type
+-- AS ENUM ('patient' , 'doctor' , 'treatment' , 'appointment' , 'billing');
+
+-- CREATE TABLE vertices (
+-- 	identifier TEXT ,
+-- 	type vertex_type ,
+-- 	properties JSON ,
+-- 	PRIMARY KEY (identifier , type)
+-- );
+
+
+-- CREATE TYPE edge_type
+-- AS ENUM ('meet_the_doctor');
+
+
+-- CREATE TABLE edges (
+--     subject_identifier TEXT,
+--     subject_type vertex_type,
+--     object_identifier TEXT,
+--     object_type vertex_type,
+--     edge_type edge_type,
+--     properties JSON,
+--     PRIMARY KEY (subject_identifier,
+--                 subject_type,
+--                 object_identifier,
+--                 object_type,
+--                 edge_type)
+-- );
+
+
+-- INSERT INTO vertices
+-- SELECT
+--     patient_id AS identifier,
+--     'patient'::VERTEX_TYPE AS type,
+--     json_build_object(
+--         'name', CONCAT(first_name, ' ', last_name),
+--         'address', address,
+--         'total_cost', (
+--             SELECT SUM(b.amount::numeric)
+--             FROM billings b
+--             WHERE b.patient_id = p.patient_id
+--         )
+--     ) AS properties
+-- FROM patients p;
+
+
+-- INSERT INTO vertices
+-- SELECT
+-- 	doctor_id AS identifier ,
+-- 	'doctor'::vertex_type AS type ,
+-- 	json_build_object(
+-- 		'name', CONCAT(first_name, ' ', last_name) ,
+-- 		'specialization' , specialization ,
+-- 		'email' , email ,
+-- 		'number_of_visits' , (SELECT COUNT(1) FROM appointments a
+-- 		WHERE d.doctor_id = a.doctor_id
+-- 		)
+-- 	) AS properties
+-- FROM doctors d
+
+
+-- WITH aggregated AS (
+-- 	SELECT
+-- 		patient_id ,
+-- 		doctor_id ,
+-- 		SUM(cost) AS subject_cost ,
+-- 		COUNT(1) AS subject_visit
+-- 	FROM appointments a
+-- 	JOIN treatments t
+-- 	ON a.appointment_id = t.appointment_id
+-- 	GROUP BY 1 , 2
+-- )
+
+-- INSERT INTO edges
+-- SELECT
+-- 	patient_id AS subject_identifier ,
+-- 	'patient'::vertex_type AS subject_type ,
+-- 	doctor_id AS object_identifier ,
+-- 	'doctor'::vertex_type AS object_type ,
+-- 	'meet_the_doctor'::edge_type AS edge_type ,
+-- 	json_build_object(
+-- 		'total_cost' , subject_cost ,
+-- 		'number_of_visit' , subject_visit
+-- 	) AS properties
+-- FROM aggregated
+
+
+-- SELECT * FROM 
+-- billings b JOIN appointments a ON b.patient_id=a.patient_id AND b.bill_date=a.appointment_date WHERE a.patient_id = 'P041'
+
+
+
+
+-- SELECT 
+-- 	v.identifier,
+-- 	e.object_identifier ,
+-- 	v.properties->>'name' AS patient_name ,
+-- 	v.properties->>'total_cost' AS total_cost ,
+-- 	e.properties->>'total_cost' AS total_cost_for_doctor
+-- FROM vertices v
+-- JOIN edges e
+-- ON v.identifier = e.subject_identifier
+-- AND v.type = e.subject_type
+-- WHERE e.object_type = 'doctor'
+-- ORDER BY v.identifier

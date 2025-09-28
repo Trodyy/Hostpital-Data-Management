@@ -43,7 +43,7 @@ CREATE TABLE billings (
 );
 
 COPY billings(bill_id,patient_id,treatment_id,bill_date,amount,payment_method,payment_status) 
-FROM '/csv_datas/billings.csv' 
+FROM '/csv_datas/billing.csv' 
 DELIMITER ',' 
 CSV HEADER;
 

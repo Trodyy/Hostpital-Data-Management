@@ -5,44 +5,41 @@ This project aims to develop a robust data management and analytics pipeline for
 
 
 ## Tools
+✅ Dcoker
+
+✅ MinIO
+
+✅ Apache Spark(PySpark)
+
+✅ Unit Testing(pytest)
 
 ✅ Postgresql
 
 ✅ Data Modelling
 
-✅ SCD Tables
-
-✅ Apache Spark(PySpark)
-
-✅ Apache Iceberg
-
-✅ MinIO
+✅ Graph Data Modelling
 
 ✅ Tableau
 
-✅ Dcoker
-
-✅ Unit Testing(pytest)
 ## Installation
 
 Clone the repo.
 ```
 git clone git@github.com:Trodyy/Hostpital-Data-Management.git
 ```
+Go to the directory.
+```
+cd Hostpital-Data-Management
+```
 Run the following command.
 ```
 pip freeze > requirements.txt
 ```
-Create notebooks directory.
-```
-mkdir -p notebooks
-sudo chown -R 1000:100 notebooks
-```
-
 Build up the project by make command.
 ```
 make build
 make up
+docker compose up python-client
 ```
 If you didn't install make run following commands(Linux/Ubuntu).
 ```
@@ -55,12 +52,6 @@ docker compose build -d
 docker compose up -d
 ```
 
-to add initiallly data
-```
-docker exec -i postgres-db bash -c "psql -U postgres -d postgres" < init.sql
-
-```
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
@@ -70,4 +61,3 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)

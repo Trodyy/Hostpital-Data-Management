@@ -60,20 +60,6 @@ to add initiallly data
 docker exec -i postgres-db bash -c "psql -U postgres -d postgres" < init.sql
 
 ```
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
 
 ## Contributing
 

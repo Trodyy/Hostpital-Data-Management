@@ -35,6 +35,7 @@ pip freeze > requirements.txt
 ```
 Build up the project by make command.
 ```
+make build
 make up
 ```
 If you didn't install make run following commands(Linux/Ubuntu).
@@ -44,6 +45,7 @@ sudo apt install make
 ```
 You can also use docker-compose directly.
 ```
+docker compose build -d
 docker compose up -d
 ```
 

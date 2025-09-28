@@ -1,0 +1,54 @@
+# version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    ports:
+      - ${MINIO_S3_API}:9000
+      - ${MINIO_WEB_CONSOLE}:9001
+    command: ["server", "/data", "--console-address", ":9001"]
+    volumes:
+      - ./data/minio:/data
+  
+  mc:
+    image: minio/mc:latest
+    container_name: mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5 &&
+      mc alias set local http://minio:9000 minio minio123 &&
+      mc mb local/mybucket || true &&
+      tail -f /dev/null
+      "
+
+  python-client:
+    build: .
+    container_name: python-minio
+    depends_on:
+    - minio
+    volumes:
+    - ./csv_datas:/app 
+    working_dir: /app
+    command: /bin/sh -c "python download-data.py && tail -f /dev/null"
+
+  pyspark-notebook:
+    image: jupyter/pyspark-notebook:latest
+    container_name: pyspark-notebook
+    ports:
+      - "8884:8888"
+      - "4048:4040"
+    depends_on:
+      - minio
+      - python-client
+    volumes:
+      - ./csv_datas:/data
+      - ./spark_data:/data
+    environment:
+      JUPYTER_TOKEN: admin
+

@@ -30,10 +30,10 @@ services:
   python-client:
     build: .
     container_name: python-minio
-    depends_on:
-    - minio
     volumes:
-    - ./csv_datas:/app 
+      - ./csv_datas:/app
+      - ./data/minio:/data
+
     working_dir: /app
     command: /bin/sh -c "python download-data.py && tail -f /dev/null"
 

@@ -73,6 +73,6 @@ CREATE TABLE treatments (
 );
 
 COPY treatments(treatment_id,appointment_id,treatment_type,description,cost,treatment_date) 
-FROM '/csv_datas/treatments.csv' 
+FROM '/csv_datas/treatmentss.csv' 
 DELIMITER ',' 
 CSV HEADER;

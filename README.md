@@ -33,6 +33,12 @@ Run the following command.
 ```
 pip freeze > requirements.txt
 ```
+Create notebooks directory.
+```
+mkdir -p notebooks
+sudo chown -R 1000:100 notebooks
+```
+
 Build up the project by make command.
 ```
 make build
@@ -49,7 +55,11 @@ docker compose build -d
 docker compose up -d
 ```
 
+to add initiallly data
+```
+docker exec -i postgres-db bash -c "psql -U postgres -d postgres" < init.sql
 
+```
 ## Usage
 
 ```python

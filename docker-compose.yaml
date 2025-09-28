@@ -30,10 +30,10 @@ services:
   python-client:
     build: .
     container_name: python-minio
-    depends_on:
-    - minio
     volumes:
-    - ./csv_datas:/app 
+      - ./csv_datas:/app
+      - ./data/minio:/data
+
     working_dir: /app
     command: /bin/sh -c "python download-data.py && tail -f /dev/null"
 
@@ -47,8 +47,48 @@ services:
       - minio
       - python-client
     volumes:
-      - ./csv_datas:/data
-      - ./spark_data:/data
+      - ./csv_datas:/home/jovyan/csv_datas
+      - ./notebooks:/home/jovyan/work
+
     environment:
-      JUPYTER_TOKEN: admin
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN}
+  
+
+ 
+  postgres:
+    image: postgres:14
+    restart: on-failure
+    container_name: postgres-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+        # - ./data.dump:/docker-entrypoint-initdb.d/data.dump
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        - ./data/postgres:/var/lib/postgresql/data
+        - ./csv_datas/:/csv_datas
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: on-failure
+    container_name: pgadmin
+    env_file:
+      - .env
+    ports:
+      - ${PGADMIN_PORT}:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+    user: root
+
+
+
+
 

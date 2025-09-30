@@ -26,6 +26,9 @@ services:
       mc mb local/mybucket || true &&
       tail -f /dev/null
       "
+    volumes:
+      - ./csv_datas:/seed
+
 
   python-client:
     build: .

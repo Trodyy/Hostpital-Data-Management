@@ -9,7 +9,7 @@ This project aims to develop a robust data management and analytics pipeline for
 ✅ Apache Spark (PySpark)\
 ✅ Unit Testing (pytest)\
 ✅ PostgreSQL\
-✅ Data Modelling\
+✅ Dimensional Data Modelling\
 ✅ Graph Data Modelling\
 ✅ Tableau
 

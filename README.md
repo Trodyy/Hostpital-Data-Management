@@ -61,8 +61,11 @@ After starting the containers, you can access the services at:
 
 After going to the [http://localhost:8080](http://localhost:8080) : 
 1-Enter the email and password in .env file (You can also customize them) to login.
+
 2-ٍenter a desired name.
+
 3-Right click on servers and in connections tab enter "postgres-db" in Host name/address part.
+
 4-Enter username and password "postgres" and "postgres123" respectively.
 
 ## Tableau Dashboard

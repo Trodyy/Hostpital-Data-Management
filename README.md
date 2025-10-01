@@ -55,7 +55,7 @@ After starting the containers, you can access the services at:
 
 - MinIO: [http://localhost:9000](http://localhost:9000)
 - pgAdmin: [http://localhost:8080](http://localhost:8080)
-- Jupyter Notebook (PySpark): [http://localhost:8888](http://localhost:8888)
+- Jupyter Notebook (PySpark): [http://localhost:8884](http://localhost:8888)
 
 ## Tableau Dashboard
 

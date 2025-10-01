@@ -54,7 +54,7 @@ After starting the containers, you can access the services at:
 
 - MinIO: [http://localhost:9000](http://localhost:9000)
 - pgAdmin: [http://localhost:8080](http://localhost:8080)
-- Jupyter Notebook (PySpark): [http://localhost:8884](http://localhost:8888)
+- Jupyter Notebook (PySpark): [http://localhost:8884](http://localhost:8884)
 
 
 ## Connect to Postgresql from pgadmin
@@ -68,6 +68,8 @@ After going to the [http://localhost:8080](http://localhost:8080) :
 3-Right click on servers and in connections tab enter "postgres-db" in Host name/address part.
 
 4-Enter username and password "postgres" and "postgres123" respectively.
+
+5-Now you can run sql files in sql directory in pgadmin.
 
 ## Tableau Dashboard
 

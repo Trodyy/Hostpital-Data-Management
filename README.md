@@ -62,7 +62,6 @@ After starting the containers, you can access the services at:
 You can view the interactive Tableau dashboard here:\
 [Hospital Data Tableau Project](https://public.tableau.com/views/HospitalDataTableauProject/ProjectDashboard?\:language=en-US&\:sid=&\:redirect=auth&\:display_count=n&\:origin=viz_share_link)
 
-*(Tip: Use the link above for easy access. The embed code is useful if you want to embed the dashboard directly in a website or documentation.)*
 
 ## Contributing
 
